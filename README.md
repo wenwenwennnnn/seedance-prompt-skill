@@ -8,20 +8,26 @@
 
 | 平台 | 说明 |
 |------|------|
-| **OpenClaw** | Chaitin 推出的 AI 编码助手，将 skill 放入 `~/.openclaw/skills/` 目录即可使用 |
-| **MonkeyCode** | 支持 OpenClaw skill 格式的 AI 助手，将 `skills/` 目录复制到配置目录 |
+| **OpenCode** | Anomaly 推出的开源 AI 编码助手（GitHub 120K stars），支持通过 skill 扩展功能 |
+| **MonkeyCode** | OpenCode 的中文版本，与 OpenCode 共享 skill 格式 |
 | **Claude Desktop** | 支持 Claude skill 格式，将 `SKILL.md` 放入 `~/.claude/skills/` 目录 |
 | **独立使用** | CLI 工具可独立运行，不依赖任何 AI 平台 |
 
-### OpenClaw / MonkeyCode 安装
+### OpenCode / MonkeyCode 安装
+
+OpenCode 和 MonkeyCode 使用相同的 skill 格式。将 `skills/` 目录复制到配置目录：
 
 ```bash
 # 克隆仓库
 git clone https://github.com/wenwenwennnnn/seedance-prompt-skill.git
 
 # 复制 skills 目录到配置目录
+# OpenCode 默认路径
 cp -r skills ~/.openclaw/
-# 或链接方式
+# 或 MonkeyCode 路径
+cp -r skills ~/.monkeycode/
+
+# 或使用链接方式
 ln -s $(pwd)/skills ~/.openclaw/skills/seedance-prompt
 ```
 
@@ -133,9 +139,9 @@ python3 skills/seedance-prompt/scripts/generate_prompt.py \
 ```
 seedance-prompt-skill/
 ├── skills/
-│   ├── manifest.json              # OpenClaw/MonkeyCode 注册文件
+│   ├── manifest.json              # OpenCode/MonkeyCode 注册文件
 │   └── seedance-prompt/
-│       ├── SKILL.md              # Skill 定义（Claude/OpenClaw 通用）
+│       ├── SKILL.md              # Skill 定义（OpenCode/MonkeyCode/Claude 通用）
 │       ├── scripts/
 │       │   └── generate_prompt.py  # CLI 工具（独立运行）
 │       └── references/
