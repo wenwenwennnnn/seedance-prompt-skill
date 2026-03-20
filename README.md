@@ -8,28 +8,28 @@
 
 | 平台 | 说明 |
 |------|------|
-| **OpenCode** | Anomaly 推出的开源 AI 编码助手（GitHub 120K stars），支持通过 skill 扩展功能 |
-| **MonkeyCode** | OpenCode 的中文版本，与 OpenCode 共享 skill 格式 |
+| **OpenCode** | Anomaly 推出的开源 AI 编码助手（126K GitHub stars），支持通过 skill 扩展功能 |
 | **Claude Desktop** | 支持 Claude skill 格式，将 `SKILL.md` 放入 `~/.claude/skills/` 目录 |
 | **独立使用** | CLI 工具可独立运行，不依赖任何 AI 平台 |
 
-### OpenCode / MonkeyCode 安装
+### OpenCode 安装
 
-OpenCode 和 MonkeyCode 使用相同的 skill 格式。将 `skills/` 目录复制到配置目录：
+OpenCode 的 skill 存放在 `.opencode/` 配置目录中。将 `skills/` 目录复制到你的 OpenCode 配置目录：
 
 ```bash
 # 克隆仓库
 git clone https://github.com/wenwenwennnnn/seedance-prompt-skill.git
 
-# 复制 skills 目录到配置目录
-# OpenCode 默认路径
-cp -r skills ~/.openclaw/
-# 或 MonkeyCode 路径
-cp -r skills ~/.monkeycode/
+# 复制 skills 目录到 OpenCode 配置目录
+# 你的项目根目录下的 .opencode/ 目录
+cp -r skills/ your-project/.opencode/
 
-# 或使用链接方式
-ln -s $(pwd)/skills ~/.openclaw/skills/seedance-prompt
+# 或全局安装（放入 HOME 目录）
+mkdir -p ~/.opencode/skills
+cp -r skills/seedance-prompt ~/.opencode/skills/
 ```
+
+> 注意：OpenCode 项目通常在项目根目录有 `.opencode/` 目录，skills 放在该目录下的 `skills/` 子目录中。
 
 ### Claude Desktop 安装
 
@@ -139,15 +139,32 @@ python3 skills/seedance-prompt/scripts/generate_prompt.py \
 ```
 seedance-prompt-skill/
 ├── skills/
-│   ├── manifest.json              # OpenCode/MonkeyCode 注册文件
+│   ├── manifest.json              # Skill 注册文件
 │   └── seedance-prompt/
-│       ├── SKILL.md              # Skill 定义（OpenCode/MonkeyCode/Claude 通用）
+│       ├── SKILL.md              # Skill 定义
 │       ├── scripts/
 │       │   └── generate_prompt.py  # CLI 工具（独立运行）
 │       └── references/
 │           └── terms.md          # 术语表
 ├── README.md
 └── LICENSE
+```
+
+### OpenCode 项目结构
+
+在 OpenCode 项目中使用时，将 skill 复制到项目目录：
+
+```
+your-project/
+├── .opencode/
+│   └── skills/
+│       ├── manifest.json
+│       └── seedance-prompt/
+│           ├── SKILL.md
+│           ├── scripts/
+│           └── references/
+├── src/
+└── ...
 ```
 
 ---
