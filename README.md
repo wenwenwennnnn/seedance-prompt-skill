@@ -4,32 +4,31 @@
 
 ## 适用平台
 
-本技能支持以下平台：
-
 | 平台 | 说明 |
 |------|------|
-| **OpenCode** | Anomaly 推出的开源 AI 编码助手（126K GitHub stars），支持通过 skill 扩展功能 |
+| **OpenClaw** | 开源个人 AI 助手（327K GitHub stars），支持多渠道（WhatsApp/Telegram/Slack/Discord等），skills 存放在 `~/.openclaw/workspace/skills/` |
 | **Claude Desktop** | 支持 Claude skill 格式，将 `SKILL.md` 放入 `~/.claude/skills/` 目录 |
 | **独立使用** | CLI 工具可独立运行，不依赖任何 AI 平台 |
 
-### OpenCode 安装
+### OpenClaw 安装
 
-OpenCode 的 skill 存放在 `.opencode/` 配置目录中。将 `skills/` 目录复制到你的 OpenCode 配置目录：
+OpenClaw 的 skills 存放在工作区目录中：
 
 ```bash
 # 克隆仓库
 git clone https://github.com/wenwenwennnnn/seedance-prompt-skill.git
 
-# 复制 skills 目录到 OpenCode 配置目录
-# 你的项目根目录下的 .opencode/ 目录
-cp -r skills/ your-project/.opencode/
+# 方法一：复制到 OpenClaw 工作区 skills 目录
+mkdir -p ~/.openclaw/workspace/skills
+cp -r seedance-prompt ~/.openclaw/workspace/skills/
 
-# 或全局安装（放入 HOME 目录）
-mkdir -p ~/.opencode/skills
-cp -r skills/seedance-prompt ~/.opencode/skills/
+# 方法二：通过 ClawHub 自动安装（如果已启用）
+# OpenClaw 会自动搜索并安装 skills
+
+# 方法三：作为项目 submodule
+git submodule add https://github.com/wenwenwennnnn/seedance-prompt-skill.git \
+  ~/.openclaw/workspace/skills/seedance-prompt
 ```
-
-> 注意：OpenCode 项目通常在项目根目录有 `.opencode/` 目录，skills 放在该目录下的 `skills/` 子目录中。
 
 ### Claude Desktop 安装
 
@@ -150,21 +149,17 @@ seedance-prompt-skill/
 └── LICENSE
 ```
 
-### OpenCode 项目结构
+### OpenClaw 中的结构
 
-在 OpenCode 项目中使用时，将 skill 复制到项目目录：
+OpenClaw 的 skills 放在 `~/.openclaw/workspace/skills/<skill>/`：
 
 ```
-your-project/
-├── .opencode/
-│   └── skills/
-│       ├── manifest.json
-│       └── seedance-prompt/
-│           ├── SKILL.md
-│           ├── scripts/
-│           └── references/
-├── src/
-└── ...
+~/.openclaw/workspace/skills/seedance-prompt/
+├── SKILL.md
+├── scripts/
+│   └── generate_prompt.py
+└── references/
+    └── terms.md
 ```
 
 ---
