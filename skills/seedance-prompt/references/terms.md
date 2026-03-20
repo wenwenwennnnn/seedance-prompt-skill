@@ -30,5 +30,5 @@
 
 9:16比例时添加：
 ```
-vertical composition, centered or lower third composition, background layers
+竖屏构图, 主体居中或下三分之一构图, 背景层次感
 ```
