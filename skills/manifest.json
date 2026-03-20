@@ -1,0 +1,20 @@
+{
+  "$schema": "../.schema/skills_manifest.json",
+  "skills": [
+    {
+      "skill_id": "seedance-prompt",
+      "name": {
+        "en": "Seedance Prompt Generator",
+        "zh": "即梦Seedance视频提示词生成器"
+      },
+      "description": {
+        "en": "Convert scripts, novels, or storyboards into Seedance 2.0 video prompts. Automatically analyzes visual style, segments scripts into shots, and generates prompts.",
+        "zh": "将剧本、小说或分镜脚本转化为即梦Seedance 2.0视频提示词。自动分析视觉风格，切分脚本片段并生成提示词。"
+      },
+      "categories": ["video", "prompt-generation", "creative"],
+      "tags": ["视频", "AI", "提示词", "剧本"],
+      "skill_md_path": "seedance-prompt/SKILL.md",
+      "is_enabled": true
+    }
+  ]
+}

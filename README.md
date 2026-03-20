@@ -6,33 +6,35 @@
 
 ### 方法一：下载安装（推荐）
 
-1. 下载最新版本：
+1. 下载或克隆仓库：
    ```bash
-   # 使用 Git clone
    git clone https://github.com/wenwenwennnnn/seedance-prompt-skill.git
-   
-   # 或下载 ZIP
-   # https://github.com/wenwenwennnnn/seedance-prompt-skill/archive/refs/heads/main.zip
    ```
 
-2. 将 skill 复制到 OpenClow 配置目录：
+2. 将 `skills/` 目录复制到 OpenClaw 配置目录：
    ```bash
    # Linux/macOS
-   cp -r seedance-prompt ~/.claude/skills/
-   # 或只复制需要的部分
-   cp SKILL.md scripts/ references/ ~/.claude/skills/seedance-prompt/
+   cp -r skills ~/.openclaw/
+   # 或只复制需要的 skill
+   cp -r skills/seedance-prompt ~/.openclaw/skills/
    
    # Windows (PowerShell)
-   Copy-Item -Path "seedance-prompt" -Destination "$env:USERPROFILE\.claude\skills\" -Recurse
+   Copy-Item -Path "skills" -Destination "$env:USERPROFILE\.openclaw\" -Recurse
    ```
 
-3. 重启 OpenClow 即可使用
+3. 重启 OpenClaw 即可使用
 
-### 方法二： submodule 引入
+### 方法二：Submodule 引入
+
+如果你有自己的 OpenClaw 项目，可以作为 submodule 添加：
 
 ```bash
 git submodule add https://github.com/wenwenwennnnn/seedance-prompt-skill.git skills/seedance-prompt
 ```
+
+### 方法三：手动合并 manifest
+
+如果你有自己的 `skills/manifest.json`，可以将 `manifest.json` 中的 `seedance-prompt` 条目合并到你的 manifest 中。
 
 ---
 
@@ -50,7 +52,7 @@ git submodule add https://github.com/wenwenwennnnn/seedance-prompt-skill.git ski
 ### 可选参数
 
 | 参数 | 说明 | 默认值 |
-|------|--------|--------|
+|------|------|--------|
 | `aspect_ratio` | 视频比例 | `9:16` |
 | `model` | 视频模型 | `seedance_2.0_fast` |
 | `subtitle` | 是否开启字幕 | `off` |
@@ -84,7 +86,7 @@ git submodule add https://github.com/wenwenwennnnn/seedance-prompt-skill.git ski
 
 ```bash
 # 生成提示词
-python3 scripts/generate_prompt.py \
+python3 skills/seedance-prompt/scripts/generate_prompt.py \
   --input script.txt \
   --output prompts.md \
   --aspect 9:16
@@ -120,12 +122,14 @@ python3 scripts/generate_prompt.py \
 
 ```
 seedance-prompt-skill/
-├── SKILL.md           # Skill 定义
-├── scripts/
-│   └── generate_prompt.py  # CLI 工具
-├── references/
-│   └── terms.md       # 术语表
-├── assets/
+├── skills/
+│   ├── manifest.json              # Skill 注册文件
+│   └── seedance-prompt/
+│       ├── SKILL.md               # Skill 定义
+│       ├── scripts/
+│       │   └── generate_prompt.py # CLI 工具
+│       └── references/
+│           └── terms.md           # 术语表
 ├── README.md
 └── LICENSE
 ```
