@@ -2,39 +2,49 @@
 
 将剧本、小说或分镜脚本转化为即梦 Seedance 2.0 视频提示词。
 
-## 安装方法
+## 适用平台
 
-### 方法一：下载安装（推荐）
+本技能支持以下平台：
 
-1. 下载或克隆仓库：
-   ```bash
-   git clone https://github.com/wenwenwennnnn/seedance-prompt-skill.git
-   ```
+| 平台 | 说明 |
+|------|------|
+| **OpenClaw** | Chaitin 推出的 AI 编码助手，将 skill 放入 `~/.openclaw/skills/` 目录即可使用 |
+| **MonkeyCode** | 支持 OpenClaw skill 格式的 AI 助手，将 `skills/` 目录复制到配置目录 |
+| **Claude Desktop** | 支持 Claude skill 格式，将 `SKILL.md` 放入 `~/.claude/skills/` 目录 |
+| **独立使用** | CLI 工具可独立运行，不依赖任何 AI 平台 |
 
-2. 将 `skills/` 目录复制到 OpenClaw 配置目录：
-   ```bash
-   # Linux/macOS
-   cp -r skills ~/.openclaw/
-   # 或只复制需要的 skill
-   cp -r skills/seedance-prompt ~/.openclaw/skills/
-   
-   # Windows (PowerShell)
-   Copy-Item -Path "skills" -Destination "$env:USERPROFILE\.openclaw\" -Recurse
-   ```
+### OpenClaw / MonkeyCode 安装
 
-3. 重启 OpenClaw 即可使用
+```bash
+# 克隆仓库
+git clone https://github.com/wenwenwennnnn/seedance-prompt-skill.git
 
-### 方法二：Submodule 引入
+# 复制 skills 目录到配置目录
+cp -r skills ~/.openclaw/
+# 或链接方式
+ln -s $(pwd)/skills ~/.openclaw/skills/seedance-prompt
+```
 
-如果你有自己的 OpenClaw 项目，可以作为 submodule 添加：
+### Claude Desktop 安装
+
+```bash
+# 克隆仓库
+git clone https://github.com/wenwenwennnnn/seedance-prompt-skill.git
+
+# 创建 skill 目录并复制
+mkdir -p ~/.claude/skills/seedance-prompt
+cp skills/seedance-prompt/SKILL.md ~/.claude/skills/seedance-prompt/
+cp -r skills/seedance-prompt/scripts ~/.claude/skills/seedance-prompt/
+cp -r skills/seedance-prompt/references ~/.claude/skills/seedance-prompt/
+```
+
+### Submodule 引入
+
+如果你有自己的配置仓库：
 
 ```bash
 git submodule add https://github.com/wenwenwennnnn/seedance-prompt-skill.git skills/seedance-prompt
 ```
-
-### 方法三：手动合并 manifest
-
-如果你有自己的 `skills/manifest.json`，可以将 `manifest.json` 中的 `seedance-prompt` 条目合并到你的 manifest 中。
 
 ---
 
@@ -82,7 +92,7 @@ git submodule add https://github.com/wenwenwennnnn/seedance-prompt-skill.git ski
 
 ## 命令行工具
 
-除了通过 AI 对话生成，你也可以使用命令行工具批量处理：
+CLI 工具可独立使用，不依赖任何 AI 平台：
 
 ```bash
 # 生成提示词
@@ -123,13 +133,13 @@ python3 skills/seedance-prompt/scripts/generate_prompt.py \
 ```
 seedance-prompt-skill/
 ├── skills/
-│   ├── manifest.json              # Skill 注册文件
+│   ├── manifest.json              # OpenClaw/MonkeyCode 注册文件
 │   └── seedance-prompt/
-│       ├── SKILL.md               # Skill 定义
+│       ├── SKILL.md              # Skill 定义（Claude/OpenClaw 通用）
 │       ├── scripts/
-│       │   └── generate_prompt.py # CLI 工具
+│       │   └── generate_prompt.py  # CLI 工具（独立运行）
 │       └── references/
-│           └── terms.md           # 术语表
+│           └── terms.md          # 术语表
 ├── README.md
 └── LICENSE
 ```
