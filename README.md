@@ -18,10 +18,12 @@
 2. 将 skill 复制到 OpenClow 配置目录：
    ```bash
    # Linux/macOS
-   cp -r .ai-ready/skills/seedance-prompt ~/.claude/skills/
+   cp -r seedance-prompt ~/.claude/skills/
+   # 或只复制需要的部分
+   cp SKILL.md scripts/ references/ ~/.claude/skills/seedance-prompt/
    
    # Windows (PowerShell)
-   Copy-Item -Path ".ai-ready/skills/seedance-prompt" -Destination "$env:USERPROFILE\.claude\skills\" -Recurse
+   Copy-Item -Path "seedance-prompt" -Destination "$env:USERPROFILE\.claude\skills\" -Recurse
    ```
 
 3. 重启 OpenClow 即可使用
@@ -48,7 +50,7 @@ git submodule add https://github.com/wenwenwennnnn/seedance-prompt-skill.git ski
 ### 可选参数
 
 | 参数 | 说明 | 默认值 |
-|------|------|--------|
+|------|--------|--------|
 | `aspect_ratio` | 视频比例 | `9:16` |
 | `model` | 视频模型 | `seedance_2.0_fast` |
 | `subtitle` | 是否开启字幕 | `off` |
@@ -82,7 +84,7 @@ git submodule add https://github.com/wenwenwennnnn/seedance-prompt-skill.git ski
 
 ```bash
 # 生成提示词
-python3 .ai-ready/skills/seedance-prompt/scripts/generate_prompt.py \
+python3 scripts/generate_prompt.py \
   --input script.txt \
   --output prompts.md \
   --aspect 9:16
@@ -118,15 +120,12 @@ python3 .ai-ready/skills/seedance-prompt/scripts/generate_prompt.py \
 
 ```
 seedance-prompt-skill/
-├── .ai-ready/
-│   └── skills/
-│       └── seedance-prompt/
-│           ├── SKILL.md           # Skill 定义
-│           ├── scripts/
-│           │   └── generate_prompt.py  # CLI 工具
-│           ├── references/
-│           │   └── terms.md       # 术语表
-│           └── assets/
+├── SKILL.md           # Skill 定义
+├── scripts/
+│   └── generate_prompt.py  # CLI 工具
+├── references/
+│   └── terms.md       # 术语表
+├── assets/
 ├── README.md
 └── LICENSE
 ```
